@@ -322,12 +322,12 @@ export const MemoryGallery: React.FC<MemoryGalleryProps> = ({
                 {/* Polaroid Frame */}
                 <div className="bg-white p-4 pb-6 rounded-xs shadow-md border border-[#eed6dc] group-hover:shadow-xl group-hover:scale-105 group-hover:rotate-0 transition-all duration-300">
                   {/* Photo Container */}
-                  <div className="relative aspect-4/3 overflow-hidden bg-[#faf5f2] mb-3">
+                  <div className="relative aspect-square overflow-hidden bg-[#faf5f2] mb-3">
                     <img
                       src={photo.imageUrl}
                       alt={photo.title}
                       referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className={`w-full h-full object-cover ${photo.imagePositionClass || 'object-center'} group-hover:scale-105 transition-transform duration-500`}
                     />
 
                     {/* Hover eye overlay */}

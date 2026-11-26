@@ -219,7 +219,7 @@ export const HeroZine: React.FC<HeroZineProps> = ({
                       src={profile.heroPhoto || assets.coupleEmbrace}
                       alt={`${profile.userName} & ${profile.partnerName}`}
                       referrerPolicy="no-referrer"
-                      className="w-[280px] sm:w-[320px] md:w-[340px] aspect-square object-cover contrast-105 group-hover:scale-105 transition-transform duration-700"
+                      className={`w-[280px] sm:w-[320px] md:w-[340px] aspect-square object-cover ${!profile.heroPhoto || profile.heroPhoto.includes('IMG_1756_0cb49174') ? 'object-[50%_58%]' : 'object-center'} contrast-105 group-hover:scale-105 transition-transform duration-700`}
                     />
 
                     {/* Overlay subtle grain */}

@@ -2,12 +2,19 @@ import { CoupleProfile, LoveReason, MemoryPhoto, TimelineMilestone } from '../ty
 
 import pinkLilyImg from '../assets/images/pink_lily_flower_1789098614817.jpg';
 import pinkVinylImg from '../assets/images/pink_vinyl_lily_1789098629427.jpg';
-import gustavoRayssaImg from '../assets/images/gustavo_rayssa_couch_1789095457155.jpg';
-import coupleEmbraceImg from '../assets/images/couple_embrace_1787609748063.jpg';
 import blueFlowersImg from '../assets/images/blue_flowers_1787609761239.jpg';
 import singleFlowerImg from '../assets/images/single_flower_1787609772452.jpg';
 import pinkFlowersEmblemImg from '../assets/images/pink_flowers_emblem_1789099609601.jpg';
 import pinkFlowerBloomImg from '../assets/images/pink_flower_bloom_1789099620864.jpg';
+
+const PHOTO_COUPLE_SKATE_COUCH = '/assets/aistudio/IMG_1756_0cb49174.JPG';
+const PHOTO_SELFIE_KISS = '/assets/aistudio/1000096089_0969692b.jpg';
+const PHOTO_GLOSS_CLASSROOM = '/assets/aistudio/c5cdcfee-22b5-4cbe-a7a5-5105f6f3b34e_473f4063.JPG';
+const PHOTO_NIGHT_TREE = '/assets/aistudio/IMG_0788_59f0dc71.jpg';
+const PHOTO_COUCH_COZY = '/assets/aistudio/IMG_0959_58cdf8ee.JPG';
+const PHOTO_RESTAURANT = '/assets/aistudio/IMG_1043_761fc2d9.JPEG';
+const PHOTO_BLACK_CAT = '/assets/aistudio/IMG_0927_7690efe9.jpg';
+const PHOTO_MALL_SMILE = '/assets/aistudio/IMG_1735_8c06307b.jpg';
 
 export const initialProfile: CoupleProfile = {
   partnerName: "Rayssa",
@@ -47,8 +54,8 @@ Feliz Aniversário, minha Esposa!`,
 };
 
 export const defaultAssets = {
-  coupleEmbrace: gustavoRayssaImg,
-  coupleEmbracePhoto: coupleEmbraceImg,
+  coupleEmbrace: PHOTO_COUPLE_SKATE_COUCH,
+  coupleEmbracePhoto: PHOTO_NIGHT_TREE,
   pinkLily: pinkLilyImg,
   pinkVinyl: pinkVinylImg,
   blueFlowers: blueFlowersImg,
@@ -142,47 +149,71 @@ export const defaultGallery: MemoryPhoto[] = [
     title: "Gustavo & Rayssa",
     date: "12 de Setembro",
     caption: "A sensação de estar exatamente onde eu sempre pertenci.",
-    imageUrl: gustavoRayssaImg,
+    imageUrl: PHOTO_COUPLE_SKATE_COUCH,
     rotation: -2,
+    imagePositionClass: "object-[50%_58%]",
   },
   {
     id: "p2",
-    title: "Nosso Abraço Favorito",
-    date: "Aconchego",
-    caption: "O melhor lugar do mundo é quando estou nos teus braços.",
-    imageUrl: coupleEmbraceImg,
+    title: "Nosso Sorriso",
+    date: "Sempre Juntos",
+    caption: "Cada segundo coladinho em você faz tudo valer a pena.",
+    imageUrl: PHOTO_SELFIE_KISS,
     rotation: 2,
+    imagePositionClass: "object-[50%_20%]",
   },
   {
     id: "p3",
-    title: "Lírios em Flor",
-    date: "Delicadeza",
-    caption: "A flor mais graciosa e perfumada, assim como você.",
-    imageUrl: pinkLilyImg,
+    title: "Cumplicidade & Risadas",
+    date: "Pequenos Detalhes",
+    caption: "Nossas bobeiras juntos são os momentos que mais amo guardar.",
+    imageUrl: PHOTO_GLOSS_CLASSROOM,
     rotation: -1.5,
+    imagePositionClass: "object-[50%_30%]",
   },
   {
     id: "p4",
-    title: "Baby Be Mine & Vinil Rosa",
-    date: "Trilha Sonora",
-    caption: "Nossa melodia favorita girando em memórias inesquecíveis.",
-    imageUrl: pinkVinylImg,
+    title: "Olhar Apaixonado",
+    date: "Sob as Estrelas",
+    caption: "Me perder no brilho dos seus olhos e nesse sorriso que ilumina tudo.",
+    imageUrl: PHOTO_NIGHT_TREE,
     rotation: 2.5,
+    imagePositionClass: "object-[50%_40%]",
   },
   {
     id: "p5",
-    title: "Desabrochar do Nosso Amor",
-    date: "Primavera",
-    caption: "Tudo fica mais vivo e colorido quando estou com você.",
-    imageUrl: pinkFlowerBloomImg,
+    title: "Aconchego no Sofá",
+    date: "Paz & Amor",
+    caption: "O mundo fica silencioso e leve quando estou aproveitando a sua companhia.",
+    imageUrl: PHOTO_COUCH_COZY,
     rotation: -2,
+    imagePositionClass: "object-[50%_35%]",
   },
   {
     id: "p6",
-    title: "Emblema de Carinho",
-    date: "Para Sempre",
-    caption: "Um jardim inteiro de sentimentos dedicados a você.",
-    imageUrl: pinkFlowersEmblemImg,
+    title: "A Mulher Mais Linda",
+    date: "Jantar Especial",
+    caption: "Meus olhos brilham sempre que eu vejo você linda e feliz assim.",
+    imageUrl: PHOTO_RESTAURANT,
     rotation: 1.5,
+    imagePositionClass: "object-[50%_32%]",
+  },
+  {
+    id: "p7",
+    title: "Coração Gigante",
+    date: "Doçura",
+    caption: "Seu jeito carinhoso e esse coração maravilhoso que encanta tudo ao redor.",
+    imageUrl: PHOTO_BLACK_CAT,
+    rotation: -1.5,
+    imagePositionClass: "object-[50%_30%]",
+  },
+  {
+    id: "p8",
+    title: "Meu Amor",
+    date: "Para Sempre",
+    caption: "Linda, forte e maravilhosa — te amar é a melhor coisa da minha vida.",
+    imageUrl: PHOTO_MALL_SMILE,
+    rotation: 2,
+    imagePositionClass: "object-[50%_38%]",
   },
 ];

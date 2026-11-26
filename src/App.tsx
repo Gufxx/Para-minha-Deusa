@@ -65,22 +65,56 @@ export default function App() {
     return initialProfile;
   });
 
+  const LEGACY_PLACEHOLDER_PATTERNS = [
+    'gustavo_rayssa_couch_1789095457155',
+    'couple_embrace_1787609748063',
+    'pink_lily_flower_1789098614817',
+    'pink_vinyl_lily_1789098629427',
+    'pink_flower_bloom_1789099620864',
+    'pink_flowers_emblem_1789099609601',
+  ];
+
+  const MIGRATION_FLAG_KEY = 'namorada_site_photos_migrated_v3';
+
+  const isLegacyPlaceholder = (url?: string) =>
+    Boolean(url && LEGACY_PLACEHOLDER_PATTERNS.some((pattern) => url.includes(pattern)));
+
+  const migrateGalleryPhotos = (existing: MemoryPhoto[]): MemoryPhoto[] => {
+    let alreadyMigrated = false;
+    try {
+      alreadyMigrated = localStorage.getItem(MIGRATION_FLAG_KEY) === 'true';
+    } catch {
+      alreadyMigrated = false;
+    }
+
+    const hasLegacyPlaceholders = existing.some((p) => isLegacyPlaceholder(p.imageUrl));
+    if (alreadyMigrated && !hasLegacyPlaceholders) {
+      return existing;
+    }
+
+    // Keep any custom user-added photos (not old stock/AI placeholders)
+    const customPhotos = existing.filter(
+      (p) =>
+        !isLegacyPlaceholder(p.imageUrl) &&
+        !defaultGallery.some((d) => d.imageUrl === p.imageUrl)
+    );
+
+    const merged = [...customPhotos, ...defaultGallery];
+    try {
+      localStorage.setItem(MIGRATION_FLAG_KEY, 'true');
+    } catch {
+      // Ignore storage errors
+    }
+    return merged;
+  };
+
   const [photos, setPhotos] = useState<MemoryPhoto[]>(() => {
     const saved =
       safeGetLocalStorage<MemoryPhoto[]>(STORAGE_KEYS.PHOTOS) ||
       safeGetLocalStorage<MemoryPhoto[]>(STORAGE_KEYS.LEGACY_PHOTOS);
 
     if (saved && Array.isArray(saved) && saved.length > 0) {
-      return saved.map((p) => {
-        if (p.id === 'p1' && (p.title === 'Nosso Abraço Favorito' || p.imageUrl.includes('couple_embrace_1787609748063'))) {
-          return {
-            ...p,
-            title: 'Gustavo & Rayssa',
-            imageUrl: defaultAssets.coupleEmbrace,
-          };
-        }
-        return p;
-      });
+      return migrateGalleryPhotos(saved);
     }
     return defaultGallery;
   });
@@ -112,22 +146,10 @@ export default function App() {
 
         if (isMounted) {
           if (loadedPhotos && loadedPhotos.length > 0) {
-            const sanitized = loadedPhotos.map((p) => {
-              if (
-                p.id === 'p1' &&
-                (p.title === 'Nosso Abraço Favorito' ||
-                  p.imageUrl.includes('couple_embrace_1787609748063'))
-              ) {
-                return {
-                  ...p,
-                  title: 'Gustavo & Rayssa',
-                  imageUrl: defaultAssets.coupleEmbrace,
-                };
-              }
-              return p;
-            });
-            setPhotos(sanitized);
-            await setItemInDB(STORAGE_KEYS.PHOTOS, sanitized);
+            const migrated = migrateGalleryPhotos(loadedPhotos);
+            setPhotos(migrated);
+            await setItemInDB(STORAGE_KEYS.PHOTOS, migrated);
+            safeSetLocalStorage(STORAGE_KEYS.PHOTOS, migrated);
           } else {
             await setItemInDB(STORAGE_KEYS.PHOTOS, defaultGallery);
           }
@@ -144,10 +166,15 @@ export default function App() {
 
         if (isMounted) {
           setProfile((prev) => {
+            const rawHero = dbHeroPhoto || sourceProfile?.heroPhoto || prev.heroPhoto;
+            const resolvedHero = isLegacyPlaceholder(rawHero)
+              ? defaultAssets.coupleEmbrace
+              : rawHero;
+
             const merged = {
               ...prev,
               ...(sourceProfile || {}),
-              heroPhoto: dbHeroPhoto || sourceProfile?.heroPhoto || prev.heroPhoto,
+              heroPhoto: resolvedHero,
             };
             if (
               !merged.secretLetter ||

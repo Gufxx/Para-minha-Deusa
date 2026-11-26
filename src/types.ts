@@ -6,6 +6,7 @@ export interface MemoryPhoto {
   caption: string;
   imageUrl: string;
   rotation?: number;
+  imagePositionClass?: string;
 }
 
 export interface TimelineMilestone {
