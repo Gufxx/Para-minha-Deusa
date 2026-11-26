@@ -1,0 +1,6 @@
+{
+  "name": "Para Você • Feliz Aniversário Meu Amor",
+  "description": "Um espaço romântico e poético com estética editorial e zine scrapbook para Rayssa feito por Gustavo.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Bodoni Moda", "Cormorant Garamond", Georgia, serif;
+  --font-editorial: "Bodoni Moda", serif;
+  --font-garamond: "Cormorant Garamond", serif;
+  --font-script: "Alex Brush", cursive;
+  --font-handwriting: "Homemade Apple", cursive;
+  --font-italianno: "Italianno", cursive;
+  --font-sans: "Plus Jakarta Sans", sans-serif;
+  --font-jp: "Noto Serif JP", serif;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    background-color: #faf5f2;
+    color: #2e1e24;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom romantic aesthetic utilities */
+.font-editorial {
+  font-family: "Bodoni Moda", serif;
+}
+
+.font-garamond {
+  font-family: "Cormorant Garamond", serif;
+}
+
+.font-script {
+  font-family: "Alex Brush", cursive;
+}
+
+.font-handwriting {
+  font-family: "Homemade Apple", cursive;
+}
+
+.font-italianno {
+  font-family: "Italianno", cursive;
+}
+
+.font-jp {
+  font-family: "Noto Serif JP", serif;
+}
+
+/* Paper grain texture */
+.paper-texture {
+  background-image: radial-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 0);
+  background-size: 16px 16px;
+}
+
+.glass-pill {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f4f6f8;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
